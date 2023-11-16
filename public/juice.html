@@ -1,0 +1,85 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      
+        <title></title>
+    </head>
+    <body >
+        <div class="container">
+            <h1 class="text-center mt-3 mb-3">Product Details </h1>
+            
+         
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+               
+                        <div class="col"></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tr><tbody  id="table_body">
+                                <thead>
+                               
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Energy</th>
+                                <th>Protein</th>
+                                <th>Manufacturing_date</th>
+                              
+
+                            </tr>
+                        </table>
+                                
+                            
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+         
+     
+        
+            <script>
+        
+                const URL="http://localhost:4000/api/v1/juice/getjuiceDetails"
+        
+                async function makeAPICall(){
+                    const result = await fetch(URL)
+                    result.json().then(res=>{
+                        console.log(res)
+                        return res.data;
+                    })
+                    .then((objectData)=>{
+                        let tableData=" ";
+                        
+                        objectData.map((values) => {
+                         tableData+=`<tr>
+                                <td>${values.Name}</td>
+                                <td>${values.Price}</td>
+                                <td>${values.Energy}</td>
+                                <td>${values.Protein}</td>
+                                <td>${values.Manufacturing_date}</td>
+                                </tr>`;
+                        
+                    })
+                      document.getElementById("table_body").innerHTML=tableData
+                    })
+                }
+                makeAPICall()
+              </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        
+
+        </div> 
+        </body>
+
+</html>
